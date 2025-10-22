@@ -1,230 +1,138 @@
 <!doctype html>
-<!--
-Created using JS Bin
-http://jsbin.com
-
-Copyright (c) 2025 by nayeon9759 (http://jsbin.com/cenojun/7/edit)
-
-Released under the MIT license: http://jsbin.mit-license.org
--->
 <meta name="robots" content="noindex">
 <html lang="ko">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>반려친구 긴급케어 설문</title>
-  <link rel="stylesheet" href="styles.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<style id="jsbin-css">
-/* 기존 디자인 그대로 유지 */
-:root{
-  --bg:#0f1724;
-  --primary:#ff4d4f;
-  --accent:#ff9f43;
-  --card:#1f2a38;
-  --muted:#b9c0d7;
-}
-
-*{box-sizing:border-box}
-body{margin:0; font-family: "Noto Sans KR", sans-serif; background:var(--bg); color:#e6eef8; padding:20px;}
-.wrap{max-width:900px;margin:0 auto;border-radius:12px;background:var(--card);padding:16px;box-shadow:0 6px 20px rgba(0,0,0,0.5);}
-
-/* HERO */
-.hero{padding:16px 20px;border-bottom:1px solid rgba(255,255,255,0.1)}
-.hero-inner h1{margin:0;color:var(--primary)}
-.lead{margin:4px 0 0;color:var(--muted);font-size:14px}
-
-/* TABS */
-.tabs{display:flex; gap:6px; margin:12px 0;}
-.tab-btn{flex:1;padding:8px 10px;border-radius:8px;background:var(--card);border:1px solid rgba(255,255,255,0.1);color:var(--muted);cursor:pointer;transition:0.2s}
-.tab-btn.active{background:var(--primary);color:white;box-shadow:0 4px 12px rgba(255,77,79,0.4);}
-
-/* submissions */
-.submissions-list{
-  margin-top:12px;
-  display:grid;
-  gap:8px;
-  /* ✨ 이 두 속성이 스크롤을 담당합니다. */
-  max-height:300px; /* 목록이 가질 수 있는 최대 높이 지정 */
-  overflow:auto;    /* 내용이 max-height를 초과하면 스크롤바 생성 */
-  
-  padding-right:4px; /* 스크롤바가 생길 공간 확보 */
-}
-
-/* PANELS */
-.panel{display:none;padding:12px 0}
-.panel.active{display:block}
-.form-card{background:rgba(255,255,255,0.05);padding:12px;margin-bottom:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.1)}
-.q{font-weight:700;margin-bottom:6px}
-.required{color:var(--primary)}
-
-.options.inline label{margin-right:16px}
-.options.grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
-.options label{display:flex;align-items:center;padding:8px;border-radius:6px;background:rgba(255,255,255,0.02);cursor:pointer;transition:0.2s}
-.options input{margin-right:6px}
-
-select,textarea,input[type="text"]{width:100%;padding:8px;border-radius:6px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);color:white;font-size:14px;}
-
-/* Buttons */
-.btn{padding:8px 12px;border-radius:6px;font-weight:700;cursor:pointer;border:none;transition:0.2s}
-.btn.primary{background:var(--primary);color:white;box-shadow:0 4px 12px rgba(255,77,79,0.4);}
-.btn.primary:hover{transform:scale(1.05)}
-.btn.ghost{background:transparent;color:var(--muted);border:1px solid rgba(255,255,255,0.1);}
-.btn.small{padding:4px 8px;font-size:12px}
-
-/* submissions */
-.submissions-list{margin-top:12px;display:grid;gap:8px;max-height:300px;overflow:auto;padding-right:4px}
-.record{background:rgba(255,255,255,0.02);padding:8px;border-radius:6px}
-.meta{font-size:12px;color:var(--muted)}
-.txt{font-size:13px}
-
-/* guide */
-.guide-card{padding:10px;background:rgba(255,255,255,0.01);border-radius:6px;border:1px solid rgba(255,255,255,0.1)}
-
-/* footer */
-.footer{margin-top:12px;text-align:center;font-size:12px;color:var(--muted)}
-
-@media(max-width:640px){.options.grid{grid-template-columns:1fr}}
-
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>반려친구 긴급케어 설문</title>
+  <link rel="stylesheet" href="styles.css">   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <main class="wrap">
-    <header class="hero">
-      <div class="hero-inner">
-        <h1>🐾 긴급! 24시 동물병원</h1>
-        <p class="lead">응급 상황—우리 서비스가 진짜 도움이 되도록, 솔직한 의견을 들려주세요.</p>
-      </div>
-    </header>
+  <main class="wrap">
+    <header class="hero">
+      <div class="hero-inner">
+        <h1>🐾 긴급! 24시 동물병원</h1>
+        <p class="lead">응급 상황—우리 서비스가 진짜 도움이 되도록, 솔직한 의견을 들려주세요.</p>
+      </div>
+    </header>
 
-    <nav class="tabs">
-      <button class="tab-btn active" data-target="survey">설문 참여</button>
-      <button class="tab-btn" data-target="guide">설문 안내</button>
-      <button class="tab-btn" data-target="submissions">다른 사람 의견 보기</button>
-    </nav>
+    <nav class="tabs">
+      <button class="tab-btn active" data-target="survey">설문 참여</button>
+      <button class="tab-btn" data-target="guide">설문 안내</button>
+      <button class="tab-btn" data-target="submissions">다른 사람 의견 보기</button>
+    </nav>
 
-    <!-- 설문 -->
-    <section id="survey" class="tab-panel active panel">
-      <form id="petSurveyForm" class="survey-form" autocomplete="off">
-        <!-- 1 -->
-        <div class="form-card">
-          <label class="q">1. 반려동물을 키우시나요? <span class="required">*</span></label>
-          <div class="options inline">
-            <label><input type="radio" name="hasPet" value="예" required> 예</label>
-            <label><input type="radio" name="hasPet" value="아니오"> 아니오</label>
-          </div>
-        </div>
+        <section id="survey" class="tab-panel active panel">
+      <form id="petSurveyForm" class="survey-form" autocomplete="off">
+                <div class="form-card">
+          <label class="q">1. 반려동물을 키우시나요? <span class="required">*</span></label>
+          <div class="options inline">
+            <label><input type="radio" name="hasPet" value="예" required> 예</label>
+            <label><input type="radio" name="hasPet" value="아니오"> 아니오</label>
+          </div>
+        </div>
 
-        <!-- 2 -->
-        <div class="form-card">
-          <label class="q">2. 당신이 사는 지역은 어디인가요?</label>
-          <div class="options">
-            <label><input type="radio" name="region" value="서울"> 서울</label>
-            <label><input type="radio" name="region" value="경기도"> 경기도</label>
-            <label><input type="radio" name="region" value="경상도"> 경상도</label>
-            <label><input type="radio" name="region" value="기타"> 기타</label>
-            <input type="text" name="regionOther" placeholder="직접 입력" style="display:none;">
-          </div>
-        </div>
+                <div class="form-card">
+          <label class="q">2. 당신이 사는 지역은 어디인가요?</label>
+          <div class="options">
+            <label><input type="radio" name="region" value="서울"> 서울</label>
+            <label><input type="radio" name="region" value="경기도"> 경기도</label>
+            <label><input type="radio" name="region" value="경상도"> 경상도</label>
+            <label><input type="radio" name="region" value="기타"> 기타</label>
+            <input type="text" name="regionOther" placeholder="직접 입력" style="display:none;">
+          </div>
+        </div>
 
-        <!-- 3 -->
-        <div class="form-card">
-          <label class="q">3. 평소 동물병원 선택 시 가장 우선시하는 기준은 무엇인가요? <span class="required">*</span></label>
-          <select name="priorityCriteria" required>
-            <option value="">선택하세요</option>
-            <option value="비용">비용</option>
-            <option value="직원의 친절도">직원의 친절도</option>
-            <option value="거리">거리</option>
-            <option value="병원의 평판">병원의 평판</option>
-            <option value="의료진의 전문성 및 경험">의료진의 전문성 및 경험</option>
-          </select>
-        </div>
+                <div class="form-card">
+          <label class="q">3. 평소 동물병원 선택 시 가장 우선시하는 기준은 무엇인가요? <span class="required">*</span></label>
+          <select name="priorityCriteria" required>
+            <option value="">선택하세요</option>
+            <option value="비용">비용</option>
+            <option value="직원의 친절도">직원의 친절도</option>
+            <option value="거리">거리</option>
+            <option value="병원의 평판">병원의 평판</option>
+            <option value="의료진의 전문성 및 경험">의료진의 전문성 및 경험</option>
+          </select>
+        </div>
 
-        <!-- 4 -->
-        <div class="form-card">
-          <label class="q">4. 응급 상황에서 우려되는 점과, 필요한 서비스 기능은 무엇인가요?” <span class="required">*</span></label>
-          <textarea name="concernAndFeature" rows="5" placeholder="예: 야간 응급비용이 불투명 → 가격 투명성 & 예상비용 계산 기능" required></textarea>
-        </div>
+                <div class="form-card">
+          <label class="q">4. 응급 상황에서 우려되는 점과, 필요한 서비스 기능은 무엇인가요?” <span class="required">*</span></label>
+          <textarea name="concernAndFeature" rows="5" placeholder="예: 야간 응급비용이 불투명 → 가격 투명성 & 예상비용 계산 기능" required></textarea>
+        </div>
 
-        <!-- 5 -->
-        <div class="form-card">
-          <label class="q">5. 응급 상황 시 병원 정보에서 '가장 중요한 정보(1순위)'와 '두 번째로 중요한 정보(2순위)'를 선택해주세요. <span class="required">*</span></label>
-          <div class="priority-grid">
-            <div>
-              <label class="small">1순위</label>
-              <select name="priority1" required>
-                <option value="">선택</option>
-                <option value="현재 운영 여부">A. 현재 운영 여부</option>
-                <option value="주차 가능 여부">B. 주차 가능 여부</option>
-                <option value="주요 진료 과목">C. 주요 진료 과목</option>
-              </select>
-            </div>
-            <div>
-              <label class="small">2순위</label>
-              <select name="priority2" required>
-                <option value="">선택</option>
-                <option value="현재 운영 여부">A. 현재 운영 여부</option>
-                <option value="주차 가능 여부">B. 주차 가능 여부</option>
-                <option value="주요 진료 과목">C. 주요 진료 과목</option>
-              </select>
-            </div>
-          </div>
-        </div>
+                <div class="form-card">
+          <label class="q">5. 응급 상황 시 병원 정보에서 '가장 중요한 정보(1순위)'와 '두 번째로 중요한 정보(2순위)'를 선택해주세요. <span class="required">*</span></label>
+          <div class="priority-grid">
+            <div>
+              <label class="small">1순위</label>
+              <select name="priority1" required>
+                <option value="">선택</option>
+                <option value="현재 운영 여부">A. 현재 운영 여부</option>
+                <option value="주차 가능 여부">B. 주차 가능 여부</option>
+                <option value="주요 진료 과목">C. 주요 진료 과목</option>
+              </select>
+            </div>
+            <div>
+              <label class="small">2순위</label>
+              <select name="priority2" required>
+                <option value="">선택</option>
+                <option value="현재 운영 여부">A. 현재 운영 여부</option>
+                <option value="주차 가능 여부">B. 주차 가능 여부</option>
+                <option value="주요 진료 과목">C. 주요 진료 과목</option>
+              </select>
+            </div>
+          </div>
+        </div>
 
-        <!-- 6 -->
-        <div class="form-card">
-          <label class="q">6. 반려동물 응급 시 최대 지불 의향 금액 범위는? <span class="required">*</span></label>
-          <div class="options grid">
-            <label><input type="radio" name="priceRange" value="50만원 미만" required> A. 50만원 미만</label>
-            <label><input type="radio" name="priceRange" value="50만원 ~ 100만원"> B. 50만원 ~ 100만원</label>
-            <label><input type="radio" name="priceRange" value="100만원 ~ 200만원"> C. 100만원 ~ 200만원</label>
-            <label><input type="radio" name="priceRange" value="200만원 이상"> D. 200만원 이상</label>
-          </div>
-        </div>
+                <div class="form-card">
+          <label class="q">6. 반려동물 응급 시 최대 지불 의향 금액 범위는? <span class="required">*</span></label>
+          <div class="options grid">
+            <label><input type="radio" name="priceRange" value="50만원 미만" required> A. 50만원 미만</label>
+            <label><input type="radio" name="priceRange" value="50만원 ~ 100만원"> B. 50만원 ~ 100만원</label>
+            <label><input type="radio" name="priceRange" value="100만원 ~ 200만원"> C. 100만원 ~ 200만원</label>
+            <label><input type="radio" name="priceRange" value="200만원 이상"> D. 200만원 이상</label>
+          </div>
+        </div>
 
-        <div class="form-actions">
-          <button type="submit" class="btn primary">제출하기</button>
-          <button type="reset" class="btn ghost">초기화</button>
-        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn primary">제출하기</button>
+          <button type="reset" class="btn ghost">초기화</button>
+        </div>
 
-        <div id="msg" class="msg" aria-live="polite"></div>
-      </form>
-    </section>
+        <div id="msg" class="msg" aria-live="polite"></div>
+      </form>
+    </section>
 
-    <!-- GUIDE -->
-    <section id="guide" class="tab-panel panel">
-      <article class="guide-card">
-        <h3>설문 안내 & 개인정보</h3>
-        <p>이 설문은 반려동물 응급 대응 서비스 개선을 위한 조사입니다. 제출된 응답은 익명으로 기록됩니다.</p>
-      </article>
-    </section>
+        <section id="guide" class="tab-panel panel">
+      <article class="guide-card">
+        <h3>설문 안내 & 개인정보</h3>
+        <p>이 설문은 반려동물 응급 대응 서비스 개선을 위한 조사입니다. 제출된 응답은 익명으로 기록됩니다.</p>
+      </article>
+    </section>
 
-    <!-- SUBMISSIONS -->
-    <section id="submissions" class="tab-panel panel">
-      <div class="panel-head">
-        <h3>최근 제출된 의견</h3>
-      </div>
-      <div id="submissionsList" class="submissions-list">
-        <div class="placeholder">아직 제출된 기록이 없습니다.</div>
-      </div>
+        <section id="submissions" class="tab-panel panel">
+      <div class="panel-head">
+        <h3>최근 제출된 의견</h3>
+      </div>
+      <div id="submissionsList" class="submissions-list">
+        <div class="placeholder">아직 제출된 기록이 없습니다.</div>
+      </div>
 
-      <div class="charts">
-        <h4>지역 분포</h4>
-        <canvas id="regionChart"></canvas>
-        <h4>응급 시 지불 의향 금액</h4>
-        <canvas id="priceChart"></canvas>
-      </div>
-    </section>
+      <div class="charts">
+        <h4>지역 분포</h4>
+        <canvas id="regionChart"></canvas>
+        <h4>응급 시 지불 의향 금액</h4>
+        <canvas id="priceChart"></canvas>
+      </div>
+    </section>
 
-    <footer class="footer">
-      <small>© 반려친구 긴급케어 · 설문용 데모 페이지</small>
-    </footer>
-  </main>
+    <footer class="footer">
+      <small>© 반려친구 긴급케어 · 설문용 데모 페이지</small>
+    </footer>
+  </main>
 
-  <script src="script.js"></script>
+  <script src="script.js"></script>
 
 
 </body>
 </html>
-
-
